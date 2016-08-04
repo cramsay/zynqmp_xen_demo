@@ -1,0 +1,9 @@
+###############################################################################
+# Please modify this file if you want to configure your own application.
+# You can uncommon and/or change the following Kconfig elements.
+###############################################################################
+
+
+if ROOTFS_COMPONENT_APPS_NAME_DOM0_INIT
+	comment "No additional options for DOMU_INIT"
+endif
