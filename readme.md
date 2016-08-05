@@ -33,7 +33,7 @@ for xen_cfg in $(ls /mnt/xen_demo/xen_*.cfg); do xl create $xen_cfg; done
 
 ```bash
 source /opt/Xilinx/petalinux-v2016.2-final/settings.sh
-export DIST_DIR=<dist-dir>
+export DIST_DIR=`pwd`/dist
 
 # Create project
 petalinux-create --type project --template zynqMP -s $DIST_DIR/ZCU102.bsp --name dom0_peta
@@ -45,8 +45,8 @@ petalinux-config
 
 # Enable ssh, bridge utils, and ethtool
 # Filesystem Packages -> console/network 	-> dropbear -> dropbear [*]
-# Filesystem Packages -> net				-> net		-> bridge-utils [*] and bridge-utils-lic [*]
-# Filesystem Packages -> console/network	-> ethtool  -> ethtool [*] and ethtool-lic[*]
+# Filesystem Packages -> net				-> net		-> bridge-utils [*]
+# Filesystem Packages -> console/network	-> ethtool  -> ethtool [*]
 petalinux-config -c rootfs
 
 # Enable XEN networking backend
@@ -65,9 +65,20 @@ Then copy over BOOT.BIN and image.ub from images/linux to the SD card.
 
 #### To clean up
 
- + Set mac address via device tree?
- + Make xen config with networking
- + Mount SD card on boot (so we can get to the kernel of Dom0)
+ + Cross compile 0verkill
+
+ ```
+git clone https://github.com/hackndev/0verkill.git
+cd 0verkill
+sed -i 's/gcc /$(CC) /g' Makefile.in #Fix hard coded gcc reference
+aclocal
+autoheader
+autoconf
+export CROSS_COMPILE=aarch64-linux-gnu-
+CC=aarch64-linux-gnu-gcc LD=aarch64-linux-gnu-ld ./configure --prefix=/usr --host=arm-linux
+make
+
+ ```
 
 ### Dist folder notes
 This is the set of files intended for distribution. The user doesn't need to recreate these, but it's useful for me to write down how I did it!
