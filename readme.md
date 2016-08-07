@@ -1,18 +1,9 @@
 # 0verkill XEN Demo
 
-## Setup Description
+# Run the demo
 
-Petalinux Dom0 and DomUs.
-Default config but with ssh and both with 0verkill "app".
-
- + Dom0 0verkill app copies over 0verkill-server
- + DomU 0verkill app copies over 0verkill (client)
-
-
-## How to run it
-
-Tell u-boot to load xen first and put the Dom0 kernel at 0x80000 so xen can find it when it's ready.
-
+Tell u-boot that we want to load XEN first.
+We put Dom0's kernel at 0x80000 so XEN can load it.
 ```
 fatload mmc 0 4000000 xen.dtb;
 fatload mmc 0 80000 Image;
@@ -20,6 +11,32 @@ fatload mmc 0 6000000 xen.ub;
 bootm 6000000 - 4000000;
 ```
 
+Now, play the game.
+
+# How to build
+
+Run init_server. This does a few things to set up a DomU for game server:
+ + Create petalinux project
+ + Enable dropbear ssh
+ + Add 0verkill_server app from dist folder
+ + Build image
+
+Run init_client. This does a few things to set up a DomU for game client:
+ + Create petalinux project
+ + Enable dropbear ssh
+ + Add 0verkill_client app from dist folder
+ + Build image
+
+Run init_dom0. This provides the Dom0 configuration which manages all of our DomU clients + server:
+ + Create petalinux project
+ + Enable...
+   - Rootfs: bridge utils, ethtool
+   - Kernel: XEN network backend
+   - System: Known MAC
+
+# OLD BUMF
+
+## How to run it
 Now we want to get our DomUs spun up.
 ```
 mount /dev/mmcblk0p1 /mnt
@@ -27,18 +44,10 @@ mount /dev/mmcblk0p1 /mnt
 for xen_cfg in $(ls /mnt/xen_demo/xen_*.cfg); do xl create $xen_cfg; done
 ```
 
-
 ## Repeatability...
 ### Dom0 creation
 
 ```bash
-source /opt/Xilinx/petalinux-v2016.2-final/settings.sh
-export DIST_DIR=`pwd`/dist
-
-# Create project
-petalinux-create --type project --template zynqMP -s $DIST_DIR/ZCU102.bsp --name dom0_peta
-cd dom0_peta
-
 # Set your MAC to something you like
 # Subsystem AUTO Hardware Settings -> Ethernet Settings -> Ethernet MAC address
 petalinux-config

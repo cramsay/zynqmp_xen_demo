@@ -7,7 +7,7 @@ include apps.common.mk
 all:  install
 
 install:
-	(cd data; find * -type f -print0) | xargs -0 -I {} $(TARGETINST) -d "data/{}" "/{}"
+	cat filelist.txt | tr '\n' '\0' | xargs -0 -I {} $(TARGETINST) -d "data/{}" "/{}"
 
 help:
 	@echo ""
