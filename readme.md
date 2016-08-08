@@ -72,34 +72,12 @@ petalinux-package --boot --u-boot
 
 Then copy over BOOT.BIN and image.ub from images/linux to the SD card.
 
-#### To clean up
-
- + Cross compile 0verkill
-
- ```
-git clone https://github.com/hackndev/0verkill.git
-cd 0verkill
-sed -i 's/gcc /$(CC) /g' Makefile.in #Fix hard coded gcc reference
-aclocal
-autoheader
-autoconf
-export CROSS_COMPILE=aarch64-linux-gnu-
-CC=aarch64-linux-gnu-gcc LD=aarch64-linux-gnu-ld ./configure --prefix=/usr --host=arm-linux
-make
-
- ```
-
-### Dist folder notes
-This is the set of files intended for distribution. The user doesn't need to recreate these, but it's useful for me to write down how I did it!
-
-First, for the 0verkill_bin folder:
- + Got source from https://github.com/hackndev/0verkill
- + Fooled about with cross compilation, then gave up.
- + Built it on ubuntu on the MPSoC board, then copied binaries
- 	* Install build-essential
-	* Edit "rebuild" to not include --with-x flag
-	* run rebuild
-
-Petalinux Makefile just uses find, xargs and TARGETINST to copy over all the files in the 0verkill_bin folder to the root filesystem.
+## How it works
 
 > 0verkill client doesn't run over serial! Must ssh!
+
+## To do
+
+ + What files do I need for server to work?
+ + Get server to start on boot
+ + Can I get uboot to do my command by default?
