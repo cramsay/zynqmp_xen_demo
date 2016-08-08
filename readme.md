@@ -80,6 +80,7 @@ Then copy over BOOT.BIN and image.ub from images/linux to the SD card.
 
 ## To do
 
+ + Get all my xen_cfg files from desktop...
  + Can I get uboot to do my command by default?
  + My start up scripts aren't working (add "S" to rc5.d script)
  + Add xen create commands to start script
