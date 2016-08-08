@@ -15,4 +15,5 @@ cd components/apps/0verkill_server
 cp -r $DIST_DIR/0verkill_server/* .
 ./build_0verkill.sh
 
+# Build image
 petalinux-build

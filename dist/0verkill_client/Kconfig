@@ -4,7 +4,7 @@
 ###############################################################################
 
 
-if ROOTFS_COMPONENT_APPS_NAME_0VERKILL
+if ROOTFS_COMPONENT_APPS_NAME_0VERKILL_CLIENT
 	comment "No additional options for 0VERKILL"
 
 # 	config APPS_0VERKILL_OPTION0

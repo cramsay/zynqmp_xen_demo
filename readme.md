@@ -5,10 +5,10 @@
 Tell u-boot that we want to load XEN first.
 We put Dom0's kernel at 0x80000 so XEN can load it.
 ```
-fatload mmc 0 4000000 xen.dtb;
+fatload mmc 0 7000000 xen.dtb;
 fatload mmc 0 80000 Image;
-fatload mmc 0 6000000 xen.ub;
-bootm 6000000 - 4000000;
+fatload mmc 0 9000000 xen.ub;
+bootm 9000000 - 7000000;
 ```
 
 Now, play the game.
@@ -32,7 +32,9 @@ Run init_dom0. This provides the Dom0 configuration which manages all of our Dom
  + Enable...
    - Rootfs: bridge utils, ethtool
    - Kernel: XEN network backend
-   - System: Known MAC
+ + Add startup scripts from dist folder
+ + Build image
+
 
 # OLD BUMF
 
@@ -79,3 +81,5 @@ Then copy over BOOT.BIN and image.ub from images/linux to the SD card.
 ## To do
 
  + Can I get uboot to do my command by default?
+ + My start up scripts aren't working
+ + Add xen create commands to start script

@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /0berkill
+cd /0verkill
 ./server

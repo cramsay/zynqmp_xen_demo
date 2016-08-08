@@ -4,6 +4,11 @@
 ###############################################################################
 
 
-if ROOTFS_COMPONENT_APPS_NAME_DOM0_INIT
-	comment "No additional options for DOMU_INIT"
+if ROOTFS_COMPONENT_APPS_NAME_0VERKILL_INIT
+	comment "No additional options for 0VERKILL"
+
+# 	config APPS_0VERKILL_OPTION0
+#	bool "option0"
+#	help
+#	  Help text
 endif
