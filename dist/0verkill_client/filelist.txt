@@ -1,4 +1,5 @@
-0verkill/0verkill.dsp
+0verkill/0verkill
+0verkill/avi
 0verkill/grx/girl4.avi
 0verkill/grx/dope.avi
 0verkill/grx/bfgbit10.avi
@@ -262,8 +263,6 @@
 0verkill/grx/corpse9.avi
 0verkill/grx/zpevak.avi
 0verkill/grx/grenade.avi
-0verkill/0verkill
-0verkill/Bot.dsp
 0verkill/data/level1.sp
 0verkill/data/sprites.dat
 0verkill/data/level2.sp
@@ -273,11 +272,3 @@
 0verkill/data/level.dat
 0verkill/data/level1.st
 0verkill/data/level1.dn
-0verkill/server
-0verkill/avi
-0verkill/editor
-0verkill/0verkill.dsw
-0verkill/test_server
-0verkill/bot
-0verkill/TestServer.dsp
-0verkill/Server.dsp

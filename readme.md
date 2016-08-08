@@ -78,6 +78,4 @@ Then copy over BOOT.BIN and image.ub from images/linux to the SD card.
 
 ## To do
 
- + What files do I need for server to work?
- + Get server to start on boot
  + Can I get uboot to do my command by default?

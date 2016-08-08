@@ -8,6 +8,7 @@ all:  install
 
 install:
 	cat filelist.txt | tr '\n' '\0' | xargs -0 -I {} $(TARGETINST) -d "data/{}" "/{}"
+	$(TARGETINST) -d -p 0755 startup_script /etc/init.d/99_0verkill_server
 
 help:
 	@echo ""
