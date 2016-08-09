@@ -4,10 +4,21 @@
 
 Tell u-boot that we want to load XEN first.
 We put Dom0's kernel at 0x80000 so XEN can load it.
+
+## From SD card
 ```
 fatload mmc 0 7000000 xen.dtb;
-fatload mmc 0 80000 Image;
 fatload mmc 0 9000000 xen.ub;
+fatload mmc 0 80000 Image;
+bootm 9000000 - 7000000;
+```
+
+## From JTAG + TFTP
+```
+setenv serverip 10.42.0.1
+tftpb 7000000 xen.dtb;
+tftpb 9000000 xen.ub;
+tftpb 80000 Image;
 bootm 9000000 - 7000000;
 ```
 
@@ -83,3 +94,10 @@ Then copy over BOOT.BIN and image.ub from images/linux to the SD card.
  + Can I get uboot to do my command by default?
  + My start up scripts aren't working (add "S" to rc5.d script)
  + Add xen create commands to start script
+
+
+## Gotchas
+
+ + Network checksum offloading
+ + Default kernel size in device tree
+ + Can't support virtual framebuffers in petalinux Dom0
