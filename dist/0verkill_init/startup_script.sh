@@ -9,3 +9,5 @@ brctl addbr xenbr0
 brctl addif xenbr0 eth0
 /sbin/udhcpc -i xenbr0 -b
 
+# Boot all the XEN domains specified in /xen
+for xen_cfg in $(ls /xen/*.cfg); do xl create $xen_cfg; done
