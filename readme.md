@@ -26,7 +26,8 @@ This builds the game server domain, the game client domain(s), and then the host
 Feel free to dive into each of these scripts - they are exactly what you'd need to type to do the project manually!
 Here's a quick summary of what each script does...
 
-init_server.sh: sets up a DomU for game server:
+## init_server.sh
+Sets up a DomU for game server:
  + Create petalinux project
  + Enable dropbear ssh (same as going through `petalinux-config -c rootfs`)
  + Add 0verkill_server app from dist folder
@@ -35,14 +36,16 @@ init_server.sh: sets up a DomU for game server:
    - Has a Makefile to copy the generated binaries to the rootfs (called from `petalinux-build`)
  + Build image
 
-init_client.sh: sets up a DomU for game client
+## init_client.sh
+Sets up a DomU for game client
  + Create petalinux project
  + Enable dropbear ssh
  + Add 0verkill_client app from dist folder
    - This is just like the 0verkill_server app, but will copy the client binaries instead of the server binaries
  + Build image
 
-init_dom0.sh: sets up Dom0 with networking for previous DomUs
+## init_dom0.sh:
+Sets up Dom0 with networking for previous DomUs
  + Create petalinux project
  + Enables...
    - Rootfs: bridge utils, ethtool
@@ -63,7 +66,7 @@ First, we need to boot the system. We want to:
  + We put Dom0's kernel at 0x80000 so XEN can load it.
  + Go!
 
-## From SD card
+## Boot from SD card
 Copy over BOOT.bin, Image, xen.dtb, and xen.ub from `dom0/images/linux` to an SD card.
 At the u-boot prompt, enter the following:
 
@@ -74,7 +77,7 @@ fatload mmc 0 80000 Image;
 bootm 9000000 - 7000000;
 ```
 
-## From JTAG + TFTP
+## ...Or boot from JTAG + TFTP
 Alternatively, we can skip the SD card and boot over jtag with a TFTP server.
 First, load u-boot onto the board with
 
@@ -89,6 +92,8 @@ tftpb 9000000 xen.ub;
 tftpb 80000 Image;
 bootm 9000000 - 7000000;
 ```
+
+## Getting to play the game
 
 Now, play the game! The server should have started automatically, but we'll need to run the clients ourselves.
 We'll want to log in over the network to each client VM and start the game... but what's the IP address of the VM we want?
