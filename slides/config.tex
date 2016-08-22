@@ -1,0 +1,87 @@
+\usepackage{default}
+\usepackage[quiet]{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage[normalem]{ulem}
+\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{tikz}
+
+\frenchspacing
+\unitlength=0.01\textwidth
+\thicklines
+\urlstyle{sf}
+\graphicspath{{images/}}
+
+\setsansfont{Open Sans}
+\setmonofont{FreeMono}
+
+\setbeamertemplate{frametitle}
+  {\begin{centering}\smallskip
+   \insertframetitle\par
+   \smallskip\end{centering}}
+\setbeamertemplate{itemize item}{$\bullet$}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[text line]{%
+    \hfill\strut{%
+        \scriptsize\sf\color{black!60}%
+        \quad\insertframenumber
+    }%
+    \hfill
+}
+
+% Define some colors:
+\definecolor{DarkFern}{HTML}{407428}
+\definecolor{DarkCharcoal}{HTML}{4D4944}
+\colorlet{Fern}{DarkFern!85!white}
+\colorlet{Charcoal}{DarkCharcoal!85!white}
+\colorlet{LightCharcoal}{Charcoal!50!white}
+\colorlet{AlertColor}{orange!80}
+\colorlet{DarkRed}{red!70!black}
+\colorlet{DarkBlue}{blue!70!black}
+\colorlet{DarkGreen}{green!70!black}
+
+\definecolor{StrathBlue}{HTML}{002B5C}
+\definecolor{EngBlue}{HTML}{0078AE}
+\definecolor{EngBlueLight}{HTML}{68B6D9}
+\definecolor{StrathGray}{HTML}{A7A9AC}
+% Use the colors:
+\setbeamercolor{title}{fg=EngBlue}
+\setbeamercolor{frametitle}{fg=EngBlue}
+\setbeamercolor{normal text}{fg=Charcoal}
+\setbeamercolor{block title}{fg=Charcoal,bg=EngBlueLight!25!white}
+\setbeamercolor{block body}{fg=Charcoal,bg=EngBlue!10!white}
+\setbeamercolor{alerted text}{fg=AlertColor}
+\setbeamercolor{itemize item}{fg=Charcoal}
+\setbeamercolor{section in toc}{fg=EngBlue}
+
+\newcommand\titleframe[2][\relax]{
+  \begin{frame}[plain]%
+    \begin{center}%
+      #2
+    \end{center}
+  \end{frame}
+}
+\AtBeginSection[]
+{
+   \begin{frame}[plain]
+     \centering
+     \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  ~\\~\\
+   \includegraphics[height=0.5\paperheight,width=0.5\paperwidth,keepaspectratio]{\sectionbg}
+   \end{frame}
+}
+
+%More itemize space
+\let\olditem\item
+\renewcommand{\item}{%
+    \olditem\vspace{12pt}}
+
+%Hide page nums
+\setbeamertemplate{footline}[page number]{}
+\setbeamertemplate{footline}{}
