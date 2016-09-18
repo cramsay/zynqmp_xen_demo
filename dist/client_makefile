@@ -4,16 +4,27 @@ endif
 
 include apps.common.mk
 
-all:  install
+all: build install
+
+build:
+	$(MAKE) -C data
+
+clean:
+
+.PHONY: install image
 
 install:
-	cat filelist.txt | tr '\n' '\0' | xargs -0 -I {} $(TARGETINST) -d "data/{}" "/{}"
+	# Please add commands below the comments to install data to target file system.
+	# Use $(TARGETINST) to copy data into the target
+	# E.g. there is data/0verkill in the current directory, and I want to
+	# copy it into the target "/" directory:
+	#$(TARGETINST) -d data/0verkill /0verkill
+	#$(TARGETINST) -d data/bin /0verkill
+	$(MAKE) -C data install
 
 help:
 	@echo ""
 	@echo "Quick reference for various supported build targets for $(INSTANCE)."
 	@echo "----------------------------------------------------"
-	@echo "  clean                  clean out build objects"
 	@echo "  all                    build $(INSTANCE) and install to rootfs host copy"
-	@echo "  build                  build subsystem"
 	@echo "  install                install built objects to rootfs host copy"
