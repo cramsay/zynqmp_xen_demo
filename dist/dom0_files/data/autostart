@@ -11,3 +11,6 @@ brctl addif xenbr0 eth0
 
 # Boot all the XEN domains specified in /etc/xen
 for xen_cfg in $(ls /etc/xen/*.cfg); do xl create $xen_cfg; done
+
+# Give Dom0 a largre weight - it needs to handle the network for ALL others!
+xl sched-credit -d Domain-0 -w 512
