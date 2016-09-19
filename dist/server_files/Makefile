@@ -18,7 +18,7 @@ install:
 	# E.g. there is data/autostart in the current directory, and I want to
 	# copy it into the target "/" directory:
 	$(TARGETINST) -d -p 0755 data/autostart /etc/init.d/0verkill_server
-	$(TARGETINST) -s /etc/init.d/0verkill_server /etc/rc5.d/S99_0verkill_server
+	$(TARGETINST) -d -s /etc/init.d/0verkill_server /etc/rc5.d/S99_0verkill_server
 
 help:
 	@echo ""

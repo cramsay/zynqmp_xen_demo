@@ -6,7 +6,7 @@ cd peta_server
 
 # Create new app for autostart scripts
 petalinux-create -t apps -n autostart --template install --enable
-cp $DIST/server_files/autostart components/apps/autostart/data/autostart
+cp $DIST/server_files/data/autostart components/apps/autostart/data/autostart
 cp $DIST/server_files/Makefile components/apps/autostart/Makefile
 
 # Bulid

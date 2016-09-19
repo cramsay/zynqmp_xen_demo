@@ -7,9 +7,11 @@ include apps.common.mk
 all:  install
 
 install:
-	cat filelist.txt | tr '\n' '\0' | xargs -0 -I {} $(TARGETINST) -d "data/{}" "/{}"
-	$(TARGETINST) -d -p 0755 startup_script.sh /etc/init.d/xen_init
-	$(TARGETINST) -s /etc/init.d/xen_init /etc/rc5.d/S99xen_init
+	$(TARGETINST) -d -p 0755 data/autostart /etc/init.d/xen_init
+	$(TARGETINST) -d -s /etc/init.d/xen_init /etc/rc5.d/S99_xen_init
+	for i in $$(ls data/xen); do\
+		$(TARGETINST) -d -p 644 data/xen/$$i /etc/xen/$$i;\
+	done
 
 help:
 	@echo ""
