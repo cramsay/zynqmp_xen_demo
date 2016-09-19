@@ -4,18 +4,25 @@ endif
 
 include apps.common.mk
 
-all:  install
+all: build install
+
+build:
+
+clean:
+
+.PHONY: install image
 
 install:
-	cat filelist.txt | tr '\n' '\0' | xargs -0 -I {} $(TARGETINST) -d "data/{}" "/{}"
-	$(TARGETINST) -d -p 0755 startup_script.sh /etc/init.d/0verkill_server.sh
+	# Please add commands below the comments to install data to target file system.
+	# Use $(TARGETINST) to copy data into the target
+	# E.g. there is data/autostart in the current directory, and I want to
+	# copy it into the target "/" directory:
+	$(TARGETINST) -d -p 0755 data/autostart /etc/init.d/0verkill_server
 	$(TARGETINST) -s /etc/init.d/0verkill_server /etc/rc5.d/S99_0verkill_server
 
 help:
 	@echo ""
 	@echo "Quick reference for various supported build targets for $(INSTANCE)."
 	@echo "----------------------------------------------------"
-	@echo "  clean                  clean out build objects"
 	@echo "  all                    build $(INSTANCE) and install to rootfs host copy"
-	@echo "  build                  build subsystem"
 	@echo "  install                install built objects to rootfs host copy"
